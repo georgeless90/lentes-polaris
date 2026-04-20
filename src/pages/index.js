@@ -5,8 +5,6 @@ export default function Home(props) {
   return (
     <>
       <Landing
-        productsWoman={props.productsWoman}
-        productsMan={props.productsMan}
         categoriesList={props.categoriesList}
       />
     </>
@@ -15,19 +13,10 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   const categoriesList = await Mockup_service.getAllCategories();
-  const productsListWoman = await Services.listByCategoryNameGender(
-    "general-vision",
-    "f"
-  );
-  const productsListMen = await Services.listByCategoryNameGender(
-    "general-vision",
-    "m"
-  );
+ 
   return {
     props: {
       categoriesList: categoriesList,
-      productsWoman: productsListWoman.body,
-      productsMan: productsListMen.body,
     },
   };
 }

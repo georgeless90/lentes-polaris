@@ -2,15 +2,12 @@ import React from "react";
 import Head from "next/head";
 
 import styles from "./_styles.module.css";
-import Services from "../../share-utilities/services/_services";
 import MockupService from "../../share-utilities/services/_mockup_service";
 import Header from "../../components/header/component";
 import TitleCreadCrumbs from "../../components/title_and_breadcrumbs/component";
-import ProductCard from "../../components/product-card/component";
 import WebDescription from "../../components/web-description/component";
 import NotificationSystem from "../../components/notification_system/component";
 import Footer from "../../components/footer/component";
-import ProductLeft from "../../components/product-card-left/component";
 
 function lentesTacticaspolarizados(props) {
   const structuredData = {
@@ -124,17 +121,6 @@ function lentesTacticaspolarizados(props) {
           </h2>
         </div>
 
-        {props.products && (
-          <ul className="products_list">
-            {props.products.map((product) => {
-              return (
-                <div className="products_list_item" key={product._id}>
-                  <ProductCard infoProduct={product} />
-                </div>
-              );
-            })}
-          </ul>
-        )}
 
         <p className="page_body_paragraph">
           Los anteojos tacticos polarizados que promocionamos en esta página
@@ -151,7 +137,6 @@ function lentesTacticaspolarizados(props) {
         </div>
 
         <div className="best_and_selleing_product_cont">
-          <ProductLeft infoProduct={props.bestProduct} />
 
           <p className="page_body_paragraph">
             Estas lentes de seguridad, marcaron una cantidad elevada en ventas
@@ -180,7 +165,6 @@ function lentesTacticaspolarizados(props) {
         </div>
 
         <div className="best_and_selleing_product_cont">
-          <ProductLeft infoProduct={props.bestSellingProduct} />
           <p className="page_body_paragraph">
             Por acumulación de votos positivos, estas lentes tácticas al parecer
             cumplieron con más expectativas que los modelos similares. Y es de
@@ -201,20 +185,10 @@ export default lentesTacticaspolarizados;
 
 export async function getServerSideProps() {
   const categoriesList = await MockupService.getAllCategories();
-  const productsList = await Services.listByCategoryName("tacticas-pola");
-  const subcategoryInfo = await MockupService.getSubcategoryById(28);
-  const bestProductInfo = await Services.getBestProduct("tacticas-pola");
-  const bestSellingProductInfo = await Services.getBestSellingProduct(
-    "tacticas-pola"
-  );
 
   return {
     props: {
       categoriesList: categoriesList,
-      category: subcategoryInfo[0],
-      products: productsList.body,
-      bestProduct: bestProductInfo.body,
-      bestSellingProduct: bestSellingProductInfo.body,
     },
   };
 }

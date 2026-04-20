@@ -129,17 +129,6 @@ function lentesCiclismopolarizados(props) {
           </h2>
         </div>
 
-        {props.products && (
-          <ul className="products_list">
-            {props.products.map((product) => {
-              return (
-                <div className="products_list_item" key={product._id}>
-                  <ProductCard infoProduct={product} />
-                </div>
-              );
-            })}
-          </ul>
-        )}
 
         <div className="page_body_subtitle">
           <h2 className="subtitle_text">
@@ -149,7 +138,6 @@ function lentesCiclismopolarizados(props) {
         </div>
 
         <div className="best_and_selleing_product_cont">
-          <ProductLeft infoProduct={props.bestProduct} />
 
           <p className="page_body_paragraph">
             El artículo de los lentes polarizados ciclismo que presentó mayor
@@ -185,7 +173,6 @@ function lentesCiclismopolarizados(props) {
         </div>
 
         <div className="best_and_selleing_product_cont">
-          <ProductLeft infoProduct={props.bestSellingProduct} />
           <p className="page_body_paragraph">
             Con un amplio respaldo en ventas y casi cero devoluciones. Estos
             lentes polarizados ciclismo, se posicionaron en el primer lugar de
@@ -205,20 +192,11 @@ export default lentesCiclismopolarizados;
 
 export async function getServerSideProps() {
   const categoriesList = await MockupService.getAllCategories();
-  const productsList = await Services.listByCategoryName("ciclismo-pola");
-  const subcategoryInfo = await MockupService.getSubcategoryById(1);
-  const bestProductInfo = await Services.getBestProduct("ciclismo-pola");
-  const bestSellingProductInfo = await Services.getBestSellingProduct(
-    "ciclismo-pola"
-  );
+
 
   return {
     props: {
       categoriesList: categoriesList,
-      category: subcategoryInfo[0],
-      products: productsList.body,
-      bestProduct: bestProductInfo.body,
-      bestSellingProduct: bestSellingProductInfo.body,
     },
   };
 }

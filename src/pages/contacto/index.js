@@ -23,20 +23,23 @@ function Contact(props) {
   const email = useInputProps("");
   const message = useInputProps("");
 
-  const handleLogin = () => {
+
+   async function handleSubmit() {
     let form = {
       email: email.value,
       text: message.value,
     };
 
+    const res = await fetch("/api/webhook", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-    Services.createMessage(form)
-      .then((response) => {
-        if (response.status == 201) {
-          router.push("/");
-        }
-      })
-      
+    const result = await res.json();
+    console.log(result);
   };
 
   return (
@@ -114,7 +117,7 @@ function Contact(props) {
               <button
                 className="form_button"
                 type="button"
-                onClick={handleLogin}
+                onClick={handleSubmit}
               >
                 <span className="form_button_text">Enviar</span>
               </button>

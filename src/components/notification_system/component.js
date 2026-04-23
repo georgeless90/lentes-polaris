@@ -11,18 +11,24 @@ function NotificationSystem(props) {
 
   const email = useInputProps("");
 
-  let handleMessageSubmit = () => {
+ 
+
+   async function handleSubmit() {
     let form = {
       email: email.value,
-      text: "notification",
+      text: 'Notificacón',
     };
 
-    Services.createMessage(form)
-    .then((response) => {
-      if (response.status == 201) {
-        router.push("/");
-      }
-    })
+    const res = await fetch("/api/webhook", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+
+    const result = await res.json();
+    console.log(result);
   };
 
   return (
@@ -51,7 +57,7 @@ function NotificationSystem(props) {
           <FontAwesomeIcon
             icon={faEnvelopeCircleCheck}
             className={styles.notification_system_field_message_icon}
-            onClick={handleMessageSubmit}
+            onClick={handleSubmit}
           />
         </button>
       </div>

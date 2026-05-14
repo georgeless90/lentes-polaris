@@ -1,7 +1,5 @@
 export default async function handler(req, res) {
   try {
-    console.log("BODY:", req.body);
-    console.log("WEBHOOK:", process.env.MAKE_WEBHOOK_URL);
 
     const response = await fetch(process.env.MAKE_WEBHOOK_URL, {
       method: "POST",

@@ -196,7 +196,8 @@ export async function getServerSideProps() {
 
 
   return {
-    props: {
-      categoriesList: categoriesList,
-  };
+      props: {
+        categoriesList: categoriesList,
+    }
+  }
 }

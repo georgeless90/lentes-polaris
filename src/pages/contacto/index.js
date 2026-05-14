@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMessage } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./_styles.module.css";
-import Services from "../../share-utilities/services/_services";
 import MockupService from "../../share-utilities/services/_mockup_service";
 import Header from "../../components/header/component";
 import TitleCreadCrumbs from "../../components/title_and_breadcrumbs/component";
